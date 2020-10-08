@@ -16,12 +16,13 @@ const CharacterSearchScreen = ({fetching,error,route}) =>{
             <ErrorScreen error={error}/>
         </View>)
     }else{
-        return(
-        <View style={styles.container}> 
-            <Searcher filterSearch={filterSearch} />
-            <Characters/>
-        </View>)
+            return(
+            <View style={styles.container}> 
+                <Searcher filterSearch={filterSearch} />
+                <Characters/>
+            </View>)
     }
+    
 } 
   
 

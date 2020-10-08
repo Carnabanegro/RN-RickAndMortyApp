@@ -3,6 +3,7 @@ import EntityCard from './EntityCard';
 import { connect } from 'react-redux';
 import {getLocationsAction} from '../redux/locDuck'
 import { View, StyleSheet, FlatList,StatusBar } from 'react-native';
+import LoadingScreen from '../screens/LoadingScreen';
 
 const Locations = ({
     locs,
@@ -12,6 +13,16 @@ const Locations = ({
     locTypeSearch,
     fetching
 }) => {
+
+    const loading = () =>{
+        if (fetching){
+            return(
+                <LoadingScreen/>
+            )
+            
+        }
+        return null
+    }
 
     const loadMore = () =>{
         if ((nextPage) && (!fetching)) {
@@ -35,6 +46,7 @@ const Locations = ({
                     )}
                     onEndReached={loadMore}
                     onEndReachedThreshold={10}
+                    ListFooterComponent={loading}
                 />    
             </View> 
                   

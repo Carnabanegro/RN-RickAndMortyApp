@@ -2,7 +2,8 @@ import React from 'react';
 import EntityCard from './EntityCard';
 import { connect } from 'react-redux';
 import { View, FlatList, StyleSheet, StatusBar } from 'react-native';
-import {getEpisodesAction} from '../redux/epiDuck'
+import {getEpisodesAction} from '../redux/epiDuck';
+import LoadingScreen from '../screens/LoadingScreen'
 
 const Episodes = ({
     epis,
@@ -11,6 +12,16 @@ const Episodes = ({
     epiCurrentSearch,
     fetching
 }) => {
+
+    const loading = () =>{
+        if (fetching){
+            return(
+                <LoadingScreen/>
+            )
+            
+        }
+        return null
+    }
     
     const loadMore = () =>{
         if ((nextPage) && (!fetching)) {
@@ -34,6 +45,7 @@ const Episodes = ({
                     )}
                     onEndReached={loadMore}
                     onEndReachedThreshold={10}
+                    ListFooterComponent={loading}
                 />    
             </View>                  
         )

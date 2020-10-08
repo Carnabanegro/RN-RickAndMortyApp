@@ -3,6 +3,7 @@ import CharCard from './CharCard';
 import { connect } from 'react-redux';
 import {getCharactersAction} from '../redux/charDuck'
 import { View, StyleSheet, FlatList, StatusBar } from 'react-native';
+import LoadingScreen from '../screens/LoadingScreen'
 
 const Characters = ({
     chars,
@@ -12,6 +13,16 @@ const Characters = ({
     charTypeSearch,
     fetching
 }) => {
+
+    const loading = () =>{
+        if (fetching){
+            return(
+                <LoadingScreen/>
+            )
+            
+        }
+        return null
+    }
         
     const loadMore = () =>{
         if ((nextPage) && (!fetching)) {
@@ -35,6 +46,7 @@ const Characters = ({
                     )}
                     onEndReached={loadMore}
                     onEndReachedThreshold={10}
+                    ListFooterComponent={loading}
                 />    
             </View>       
         )
